@@ -13,11 +13,16 @@ Lunchathon::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   match '/dashboard' => 'dashboard#dashboard', :as => 'dashboard'
+
+  match '/login' => 'dashboard#login', :as => 'login', :defaults => {:format => :json}
+
   match '/create_user' => 'dashboard#create_user', :as => 'create_user'
   match '/create_restaurant' => 'dashboard#create_restaurant', :as => 'create_restaurant'
+
   match '/get_restaurants' => 'dashboard#get_restaurants', :as => 'get_restaurants', :defaults => {:format => :json}
   match '/get_all_data' => 'dashboard#get_all_data', :as => 'get_all_data', :defaults => {:format => :json}
-  match '/set_user_to_restaurant' => 'dashboard#set_user_to_restaurant', :as => 'set_user_to_restaurant'#, :defaults => {:format => :json}
+
+  match '/set_user_to_restaurant' => 'dashboard#set_user_to_restaurant', :as => 'set_user_to_restaurant'
 
 
   # Sample resource route with options:

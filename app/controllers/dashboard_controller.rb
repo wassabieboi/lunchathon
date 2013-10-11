@@ -2,6 +2,18 @@ class DashboardController < ApplicationController
 
   respond_to :json
 
+  # front-end must check for is_existing in response, catch if not parsable JSON
+  def login
+    user = User.exists?(:username => params[:username])
+    if user
+      session[:username] = params[:username]
+      redirect_to dashboard_path
+    else
+      new_user = {:username => params[:username], :is_existing => false}
+      respond_with new_user
+    end
+  end
+
 	def create_user
     user = User.new(:username => params[:username], :displayname => params[:displayname])
     if user.save
@@ -15,8 +27,9 @@ class DashboardController < ApplicationController
       redirect_to dashboard_path
     else
       # flash.now[:error] = "An error has occurred"
-      # flash[:error] = "An error has occurred"
-      flash[:notice] = "hello"
+      flash[:notice] = "That restaurant is already suggested!"
+      redirect_to dashboard_path
+      # flash[:notice] = "hello"
     end
   end
 
@@ -42,7 +55,8 @@ class DashboardController < ApplicationController
     puts restaurant_to_join.users.to_s
     
     restaurant_to_join.users << user_to_add
-    puts restaurant_to_join.users.to_s
+
+    redirect_to dashboard_path
   end
 
 end
