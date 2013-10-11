@@ -30,15 +30,15 @@
         - unless flash[key].blank?
           - if key == :error
             .alert.alert-error.notice
-              %a.close{"data-dismiss" => "alert"} ×
+              %button.close{"data-dismiss" => "alert"} ×
               = flash[key]
           - elsif key == :success
             .alert.alert-success.notice
-              %a.close{"data-dismiss" => "alert"} ×
+              %button.close{"data-dismiss" => "alert"} ×
               = flash[key]
           - else 
             .alert.alert-info.notice
-              %a.close{"data-dismiss" => "alert"} ×
+              %button.close{"data-dismiss" => "alert"} ×
               = flash[key]
       .container
         = yield
