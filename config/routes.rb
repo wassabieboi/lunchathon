@@ -13,6 +13,8 @@ Lunchathon::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   match '/dashboard' => 'dashboard#dashboard', :as => 'dashboard'
+  match '/m' => 'dashboard#mobile', :as => 'mobile'
+  match '/m/join' => 'dashboard#join', :as => 'join'
 
   # Sample resource route with options:
   #   resources :products do
