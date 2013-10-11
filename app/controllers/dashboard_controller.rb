@@ -27,7 +27,7 @@ class DashboardController < ApplicationController
       redirect_to dashboard_path
     else
       # flash.now[:error] = "An error has occurred"
-      flash[:notice] = "That restaurant is already suggested!"
+      flash[:error] = "That restaurant is already suggested!"
       redirect_to dashboard_path
       # flash[:notice] = "hello"
     end
