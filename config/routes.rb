@@ -10,22 +10,23 @@ Lunchathon::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
   match '/dashboard' => 'dashboard#dashboard', :as => 'dashboard'
   match '/m' => 'dashboard#mobile', :as => 'mobile'
   match '/m/join' => 'dashboard#join', :as => 'join'
 
-  match '/login' => 'dashboard#login', :as => 'login', :defaults => {:format => :json}
+  match '/logout' => 'dashboard#logout', :as => 'log_out'
 
+  match '/check_user' => 'dashboard#check_user', :as => 'check_user'
   match '/create_user' => 'dashboard#create_user', :as => 'create_user'
+  match '/set_user_to_restaurant' => 'dashboard#set_user_to_restaurant', :as => 'set_user_to_restaurant'
+
   match '/create_restaurant' => 'dashboard#create_restaurant', :as => 'create_restaurant'
 
   match '/get_restaurants' => 'dashboard#get_restaurants', :as => 'get_restaurants', :defaults => {:format => :json}
   match '/get_all_data' => 'dashboard#get_all_data', :as => 'get_all_data', :defaults => {:format => :json}
-
-  match '/set_user_to_restaurant' => 'dashboard#set_user_to_restaurant', :as => 'set_user_to_restaurant'
-
+  
+  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
 
   # Sample resource route with options:
   #   resources :products do
