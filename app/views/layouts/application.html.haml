@@ -7,5 +7,40 @@
   = csrf_meta_tags
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
 %body
+    / .navbar.navbar-fixed-top
+    /     .navbar-inner
+    /         .container-fluid
+    /             %ul.nav.pull-left
+    /                 %li= link_to "Crowd"#, root_path
+    /             %ul.nav.pull-right
+    /                 -if current_user
+    /                     %li= link_to current_user.email, home_path
+    /                     %li.divider-veritcal
+    /                     %li= link_to "Logout", log_out_path
+    /                 -else
+    /                     -if @signup
+    /                         %li= link_to "Existing User?"
+    /                         %li.divider-veritcal
+    /                         %li= link_to "Log in", root_path
+    /                     - else
+    /                         %li= link_to "New to Crowd?"
+    /                         %li.divider-veritcal
+    /                         %li= link_to "Sign Up", signup_path
 
-= yield
+    - [:notice, :error, :success].each do |key|
+        - unless flash[key].blank?
+            - if key == :error
+                .alert.alert-error.notice
+                    %a.close{"data-dismiss" => "alert"} ×
+                    = flash[key]
+            - elsif key == :success
+                .alert.alert-success.notice
+                    %a.close{"data-dismiss" => "alert"} ×
+                    = flash[key]
+            - else 
+                .alert.alert-info.notice
+                    %a.close{"data-dismiss" => "alert"} ×
+                    = flash[key]
+
+    .container
+        = yield
