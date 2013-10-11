@@ -44,4 +44,4 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'haml-rails'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', :git => 'git://github.com/thomas-mcdonald/bootstrap-sass.git', :branch => '3'

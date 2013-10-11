@@ -1,6 +1,7 @@
 =render :partial => "mobile_navbar", :layout => "mobile_navbar"
 
-%table.table
-  - [ "Ikes", "Picadilly", "Himawari"].each do |restaurant|
-    %tr
-      %td <big>#{link_to(restaurant, 'm/join')}</big> <br/> <small>(5 diners)</small>
+/ %table.table
+/   - [ "Ikes", "Picadilly", "Himawari"].each do |restaurant|
+/     %tr
+/       %td <big>#{link_to(restaurant, 'm/join')}</big> <br/> <small>(5 diners)</small>
+.list-group#restaurant-list

@@ -7,20 +7,6 @@
     = csrf_meta_tags
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
       %body
-        / - if request.fullpath.slice(0,2) == '/m/'
-        / .navbar.navbar-default
-        /   .navbar-inner
-        /     .container-fluid
-        /       %ul.nav.pull-left
-        /         %li= link_to "Fellowship"#, root_path
-        /       %ul.nav.pull-right
-        /         -if current_user
-        /           / %li= "Hi " + truncate(current_user.displayname, :length => 1, :separate => ' ') + "!"
-        /           %li.navbar-text= "Hi " + current_user.displayname + "!"
-        /           %li.divider-veritcal
-        /           %li= link_to "Logout", log_out_path
-        /         -else
-        /           %li= link_to "Hi Guest!"#
         - [:notice, :error, :success].each do |key|
           - unless flash[key].blank?
             - if key == :error

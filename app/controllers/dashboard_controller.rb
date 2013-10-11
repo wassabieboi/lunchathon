@@ -60,8 +60,12 @@ class DashboardController < ApplicationController
 
 
   def get_restaurants
-    restaurants = Restaurant.where(:is_active => true).select("name, id")
-    respond_with(restaurants)
+    results = []
+    restaurants = Restaurant.where(:is_active => true).select("name, id").to_a
+    restaurants.each do |r|
+      results << {:id => r.id, :name => r.name, :count => r.users.count}
+    end
+    respond_with(results)
   end
 
   def get_all_data

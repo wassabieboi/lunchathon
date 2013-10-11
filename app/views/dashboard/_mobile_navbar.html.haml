@@ -7,7 +7,7 @@
         -if current_user
           / %li= "Hi " + truncate(current_user.displayname, :length => 1, :separate => ' ') + "!"
           %li.navbar-text= "Hi " + current_user.displayname + "!"
-          %li.divider-veritcal
-          %li= link_to "Logout", log_out_path
+          %li.divider-vertical
+          / %li= link_to "Logout", log_out_path
         -else
           %li= link_to "Hi Guest!"#
