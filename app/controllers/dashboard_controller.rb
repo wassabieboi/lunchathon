@@ -18,7 +18,6 @@ class DashboardController < ApplicationController
     if User.exists?(:username => params[:username])
       session[:username] = params[:username]
       result = {:isNew => false}
-      respond_with
     else
       result = {:isNew => true}
     end

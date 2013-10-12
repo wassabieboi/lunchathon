@@ -14,10 +14,15 @@ function attachSignUpButton() {
   $(function() {
     $('#add-to-restaurant').click(function() {
       var username = $('#username-input').val();
-      $.getJSON('/check_user/', {'username' : username}, function(isNew) {
-        console.log(isNew);
-        if (isNew) {
+      var restaurantId = $('#restaurant-id').text();
+      $.getJSON('/check_user/', {'username' : username}, function(isNewStatus) {
+        if (isNewStatus.isNew) {
           $('#register-modal').modal('toggle');
+        }
+        else {
+          $.post('/set_user_to_restaurant', {'username' : username, 'restaurant_id' : restaurantId}, function(success) {
+            window.location = '/m/'
+          });
         }
       });
     });
