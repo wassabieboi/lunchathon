@@ -12,7 +12,7 @@ Lunchathon::Application.routes.draw do
 
   match '/dashboard' => 'dashboard#dashboard', :as => 'dashboard'
   match '/m' => 'dashboard#mobile', :as => 'mobile'
-  match '/m/join' => 'dashboard#join', :as => 'join'
+  match '/m/restaurant:id/' => 'dashboard#join', :as => 'join'
 
   match '/logout' => 'dashboard#logout', :as => 'log_out'
 
@@ -23,6 +23,7 @@ Lunchathon::Application.routes.draw do
   match '/create_restaurant' => 'dashboard#create_restaurant', :as => 'create_restaurant'
 
   match '/get_restaurants' => 'dashboard#get_restaurants', :as => 'get_restaurants', :defaults => {:format => :json}
+  match '/get_users' => 'dashboard#get_users', :as => 'get_users', :defaults => {:format => :json}
   match '/get_all_data' => 'dashboard#get_all_data', :as => 'get_all_data', :defaults => {:format => :json}
   
   # Sample resource route (maps HTTP verbs to controller actions automatically):

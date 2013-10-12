@@ -1,6 +1,40 @@
-%table.table
-	%th
-		%td Ike's
-	- [ "Derek", "Brian", "Ken", "Laura", "Georgia"].each do |user|
-		%tr
-			%td= user
+=render :partial => "mobile_navbar", :layout => "mobile_navbar"
+
+= javascript_include_tag 'mobile'
+
+%span#restaurant-id{:style => "display:none"}=params[:id]
+:javascript
+  getRestaurantUsers();
+  attachSignUpButton();
+
+.panel.panel-default
+  .panel-heading#panel-restaurant-name
+  %table.table#restaurant-user-table
+    %tbody
+    / %th Ike's
+    / 	%td Ike's
+    / - [ "Derek", "Brian", "Ken", "Laura", "Georgia"].each do |user|
+    / 	%tr
+    / 		%td= user
+
+.input-group
+  - if current_user
+    %input.form-control#username-input{:type => "text", :readonly => "true", :value => session[:username]}
+  - else
+    %input.form-control#username-input{:type => "text"}
+  %span.input-group-btn
+    %button.btn.btn-default#add-to-restaurant{:type => "button"} Sign me up!
+
+.modal.fade#register-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{:type => "button", "data-dismiss" => "modal", "area-hidden"  => "true"} ×
+        %h4.modal-title Register as new user?
+      .modal-body
+        %p You are a new user, please register!
+        %p Please enter a display name:
+        %input
+      .modal-footer
+        %button.btn.btn-default{:type => "button", "data-dismiss" => "modal"} Close
+        %button.btn.btn-primary{:type => "button"} Register

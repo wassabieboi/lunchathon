@@ -1,4 +1,4 @@
-.navbar.navbar-default
+.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
   .navbar-inner
     .container-fluid
       %ul.nav.pull-left
@@ -6,8 +6,8 @@
       %ul.nav.pull-right
         -if current_user
           / %li= "Hi " + truncate(current_user.displayname, :length => 1, :separate => ' ') + "!"
-          %li.navbar-text= "Hi " + current_user.displayname + "!"
+          %li.navbar-text= "Hi " + current_user.displayname + "!" 
           %li.divider-vertical
-          / %li= link_to "Logout", log_out_path
+          / %li.navbar-link= link_to "Logout", log_out_path
         -else
           %li= link_to "Hi Guest!"#

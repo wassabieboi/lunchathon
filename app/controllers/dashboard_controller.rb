@@ -17,10 +17,12 @@ class DashboardController < ApplicationController
   def check_user
     if User.exists?(:username => params[:username])
       session[:username] = params[:username]
-      respond_with true
+      result = {:isNew => false}
+      respond_with
     else
-      respond_with false
+      result = {:isNew => true}
     end
+    respond_with result
   end
 
   def logout
@@ -65,6 +67,14 @@ class DashboardController < ApplicationController
     restaurants.each do |r|
       results << {:id => r.id, :name => r.name, :count => r.users.count}
     end
+    respond_with(results)
+  end
+
+  def get_users
+    restaurant = Restaurant.find(params[:restaurant_id])
+    users = restaurant.users.select('displayname')
+    @restaurant_id = params[:restaurant_id]
+    results = {:restaurant_name => restaurant.name, :users => users}
     respond_with(results)
   end
 
