@@ -2,6 +2,14 @@ class DashboardController < ApplicationController
 
   respond_to :json
 
+  def dashboard
+    restaurants = Restaurant.where(:is_active => true)
+    @all_data = []
+    restaurants.each do |restaurant|
+      @all_data << {"restaurant_name" => restaurant.name, "restaurant_users" => restaurant.users.select("username, displayname")}
+    end
+  end
+
   # front-end must check for is_existing in response, catch if not parsable JSON
   # def login
   #   user = User.exists?(:username => params[:username])
@@ -86,5 +94,4 @@ class DashboardController < ApplicationController
     end
     respond_with all_data
   end
-
 end

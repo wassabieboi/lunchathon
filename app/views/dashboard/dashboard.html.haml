@@ -1,3 +1,6 @@
-%h1 New Dashboard
+%h1 Fellowship
 
-%input.btn.btnprimary{:name=>"button1", :type=>"submit", :value=>"Hit me"}
+.row
+  -@all_data.each do |ship|
+    .col-md-2= ship["restaurant_name"]
+
