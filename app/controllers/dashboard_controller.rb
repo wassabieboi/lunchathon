@@ -33,11 +33,12 @@ class DashboardController < ApplicationController
     user = User.new(:username => params[:username], :displayname => params[:displayname])
     if user.save
       session[:username] = params[:username]
-      respond_with true
+      result = {:isCreated => true}
     else
       flash[:error] = "That user already exists!"
-      respond_with false
+      result = {:isCreated => false}
     end
+    respond_with result = {:isCreated => true}
   end
 
   def set_user_to_restaurant

@@ -6,6 +6,7 @@
 :javascript
   getRestaurantUsers();
   attachSignUpButton();
+  attachModalRegisterButton();
 
 .panel.panel-default
   .panel-heading#panel-restaurant-name
@@ -25,7 +26,7 @@
   %span.input-group-btn
     %button.btn.btn-default#add-to-restaurant{:type => "button"} Sign me up!
 
-.modal.fade#register-modal
+.modal.fade#modal-register
   .modal-dialog
     .modal-content
       .modal-header
@@ -34,7 +35,7 @@
       .modal-body
         %p You are a new user, please register!
         %p Please enter a display name:
-        %input
+        %input#displayname-input
       .modal-footer
         %button.btn.btn-default{:type => "button", "data-dismiss" => "modal"} Close
-        %button.btn.btn-primary{:type => "button"} Register
+        %button.btn.btn-primary#modal-register-button{:type => "button"} Register

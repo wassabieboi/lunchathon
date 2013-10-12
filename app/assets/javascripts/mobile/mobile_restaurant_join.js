@@ -17,7 +17,7 @@ function attachSignUpButton() {
       var restaurantId = $('#restaurant-id').text();
       $.getJSON('/check_user/', {'username' : username}, function(isNewStatus) {
         if (isNewStatus.isNew) {
-          $('#register-modal').modal('toggle');
+          $('#modal-register').modal('toggle');
         }
         else {
           $.post('/set_user_to_restaurant', {'username' : username, 'restaurant_id' : restaurantId}, function(success) {
@@ -27,4 +27,21 @@ function attachSignUpButton() {
       });
     });
   });
+}
+
+function attachModalRegisterButton() {
+  $(function() {
+    $('#modal-register-button').click(function() {
+      var username = $('#username-input').val();
+      var displayname = $('#displayname-input').val();
+      $.getJSON('/create_user/', {'username' : username, 'displayname' : displayname}, function(success) {
+        if (success.isCreated) {
+          var restaurantId = $('#restaurant-id').text();
+          $.post('/set_user_to_restaurant', {'username' : username, 'restaurant_id' : restaurantId}, function(success) {
+            window.location = '/m/'
+          });
+        }
+      })
+    });
+  })
 }
