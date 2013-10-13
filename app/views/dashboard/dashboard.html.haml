@@ -1,6 +1,12 @@
+// %meta{ "http-equiv" => "refresh", :content =>"15" }
+
 %h1 Fellowship
 
-.row
-  -@all_data.each do |ship|
-    .col-md-2= ship["restaurant_name"]
+.container
+  .row
+    -@all_data.sort_by { |map| map["restaurant_users"].count }.reverse.each do |ship|
+      .col-md-2
+        %h3= ship["restaurant_name"]
+        -ship["restaurant_users"].each do |user|
+          %p= user["displayname"]
 
