@@ -11,8 +11,9 @@ Lunchathon::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   match '/dashboard' => 'dashboard#dashboard', :as => 'dashboard'
-  match '/m' => 'dashboard#mobile', :as => 'mobile'
+  match '/m' => 'dashboard#mobile', :as => 'mobile_dashboard'
   match '/m/restaurant:id/' => 'dashboard#join', :as => 'join'
+  match '/m/restaurantnew' => 'dashboard#newrestaurant', :as => 'new_restaurant'
 
   match '/logout' => 'dashboard#logout', :as => 'log_out'
 

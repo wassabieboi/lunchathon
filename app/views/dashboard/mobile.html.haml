@@ -4,4 +4,7 @@
 
 :javascript
   getRestaurants()
-.list-group#restaurant-list
+  
+.list-group
+  %a.list-group-item#new-restaurant-item{:href => '/m/restaurantnew'}
+    %h2 Suggest a new restaurant...

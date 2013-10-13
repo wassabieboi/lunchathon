@@ -2,7 +2,7 @@ function getRestaurants() {
   $.getJSON('/get_restaurants', function(restaurants) {
     for (var i = restaurants.length - 1; i >= 0; i--) {
       var currentRestaurant = restaurants[i];
-      $('#restaurant-list').append(createRestaurantListGroupItem(currentRestaurant.name, currentRestaurant.count, currentRestaurant.id));
+      createRestaurantListGroupItem(currentRestaurant.name, currentRestaurant.count, currentRestaurant.id).insertBefore($('#new-restaurant-item'));
     };
   });
 }

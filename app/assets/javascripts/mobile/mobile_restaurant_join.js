@@ -10,9 +10,26 @@ function getRestaurantUsers() {
   });
 }
 
+function attachCreateRestaurantButton() {
+  $(function() {
+    $('#create-restaurant-button').click(function() {
+      var restaurantName = $('#restaurant-name-input').val();
+      $.post('/create_restaurant/', {'name' : restaurantName}, function(success) {
+        if (success.is_created) {
+          $('#restaurant-panel').html('<div class="panel-heading" id="panel-restaurant-name">' + restaurantName + '</div>');
+          $('#restaurant-id').text(success.restaurant_id);
+        }
+        else {
+          // put in error popup
+        }
+      });
+    });
+  });
+}
+
 function attachSignUpButton() {
   $(function() {
-    $('#add-to-restaurant').click(function() {
+    $('#add-to-restaurant-button').click(function() {
       var username = $('#username-input').val();
       var restaurantId = $('#restaurant-id').text();
       $.getJSON('/check_user/', {'username' : username}, function(isNewStatus) {
@@ -20,7 +37,7 @@ function attachSignUpButton() {
           $('#modal-register').modal('toggle');
         }
         else {
-          $.post('/set_user_to_restaurant', {'username' : username, 'restaurant_id' : restaurantId}, function(success) {
+          $.post('/set_user_to_restaurant/', {'restaurant_id' : restaurantId}, function(success) {
             window.location = '/m/'
           });
         }
@@ -35,11 +52,14 @@ function attachModalRegisterButton() {
       var username = $('#username-input').val();
       var displayname = $('#displayname-input').val();
       $.getJSON('/create_user/', {'username' : username, 'displayname' : displayname}, function(success) {
-        if (success.isCreated) {
+        if (success.is_created) {
           var restaurantId = $('#restaurant-id').text();
-          $.post('/set_user_to_restaurant', {'username' : username, 'restaurant_id' : restaurantId}, function(success) {
+          $.post('/set_user_to_restaurant/', {'username' : username, 'restaurant_id' : restaurantId}, function(success) {
             window.location = '/m/'
           });
+        }
+        else {
+          // put in error popup
         }
       })
     });

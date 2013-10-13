@@ -10,18 +10,6 @@ class DashboardController < ApplicationController
     end
   end
 
-  # front-end must check for is_existing in response, catch if not parsable JSON
-  # def login
-  #   user = User.exists?(:username => params[:username])
-  #   if user
-  #     session[:username] = params[:username]
-  #     redirect_to dashboard_path
-  #   else
-  #     new_user = {:username => params[:username], :is_existing => false}
-  #     respond_with new_user
-  #   end
-  # end
-
   def check_user
     if User.exists?(:username => params[:username])
       session[:username] = params[:username]
@@ -34,40 +22,41 @@ class DashboardController < ApplicationController
 
   def logout
     session[:username] = nil
-    redirect_to dashboard_path
+    redirect_to mobile_dashboard_path
   end
 
   def create_user
     user = User.new(:username => params[:username], :displayname => params[:displayname])
     if user.save
       session[:username] = params[:username]
-      result = {:isCreated => true}
+      result = {:is_created => true}
     else
       flash[:error] = "That user already exists!"
-      result = {:isCreated => false}
+      result = {:is_created => false}
     end
-    respond_with result = {:isCreated => true}
+    respond_with result
   end
 
   def set_user_to_restaurant
     restaurant_to_join = Restaurant.find(params[:restaurant_id])
-    user_to_add = User.find_by_username(params[:username])
+    user_to_add = User.find_by_username(session[:username])
     
     restaurant_to_join.users << user_to_add
     flash.now[:success] = "Successfully added to " + restaurant_to_join.name
-    redirect_to dashboard_path
+    redirect_to mobile_dashboard_path
   end
 
   def create_restaurant
     restaurant = Restaurant.new(:name => params[:name], :is_active => true)
     if restaurant.save
-      redirect_to dashboard_path
+      # result["is_created"] = true
+      # result["restaurant_id"] = restaurant.id
+      puts "id" << restaurant.id
+      render json: {:is_created => true, :restaurant_id => restaurant.id}
     else
-      flash[:error] = "That restaurant is already suggested!"
-      redirect_to dashboard_path
+      render json: {:is_created => false}
     end
   end
-
 
   def get_restaurants
     results = []

@@ -2,5 +2,5 @@ class Restaurant < ActiveRecord::Base
   has_many :users
   attr_accessible :name, :is_active
 
-  validates :name, :uniqueness => true
+  validates :name, :uniqueness => true, :presence => true
 end

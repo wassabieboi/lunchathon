@@ -1,22 +1,29 @@
 =render :partial => "mobile_navbar", :layout => "mobile_navbar"
 
-= javascript_include_tag 'mobile'
+= javascript_include_tag "mobile"
 
 %span#restaurant-id{:style => "display:none"}=params[:id]
+- if params[:id] != "new"
+  :javascript
+    getRestaurantUsers();
+- else
+  :javascript
+    attachCreateRestaurantButton();
+    
 :javascript
-  getRestaurantUsers();
   attachSignUpButton();
   attachModalRegisterButton();
 
-.panel.panel-default
-  .panel-heading#panel-restaurant-name
+.panel.panel-default#restaurant-panel
+  - if params[:id] == "new"
+    .input-group.full-input-width
+      %input.form-control#restaurant-name-input{:type => "text"}
+      %span.input-group-btn
+        %button.btn.btn-default#create-restaurant-button{:type => "button"} Create restaurant!
+  - else
+    .panel-heading#panel-restaurant-name
   %table.table#restaurant-user-table
     %tbody
-    / %th Ike's
-    / 	%td Ike's
-    / - [ "Derek", "Brian", "Ken", "Laura", "Georgia"].each do |user|
-    / 	%tr
-    / 		%td= user
 
 .input-group
   - if current_user
@@ -24,7 +31,7 @@
   - else
     %input.form-control#username-input{:type => "text"}
   %span.input-group-btn
-    %button.btn.btn-default#add-to-restaurant{:type => "button"} Sign me up!
+    %button.btn.btn-default#add-to-restaurant-button{:type => "button"} Sign me up!
 
 .modal.fade#modal-register
   .modal-dialog
