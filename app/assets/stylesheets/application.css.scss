@@ -10,17 +10,13 @@ body {
 
 @media (max-width: 768px) {
   .container {
-    padding:0;
+    padding:10px;
     margin:0;
   }
 
-  body {
-    padding:0;
-  }
-
   .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
-    margin-left: 0;
-    margin-right: 0;
+    padding-left: 15px;
+    padding-right: 15px;
     margin-bottom:0;
   }
 }
