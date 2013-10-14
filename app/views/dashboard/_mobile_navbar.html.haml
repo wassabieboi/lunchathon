@@ -1,10 +1,10 @@
 .navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
   .navbar-inner
-    .container
-      %ul.nav.navbar-nav.navbar-left
+    .container-fluid
+      %ul.nav.navbar-nav.pull-left
         %li
           %p.navbar-text= link_to "Fellowship", mobile_dashboard_path
-      %ul.nav.navbar-nav.navbar-right
+      %ul.nav.navbar-nav.pull-right
         -if current_user
           %li
             %p.navbar-text= "Hi " + current_user.displayname + "!" 
