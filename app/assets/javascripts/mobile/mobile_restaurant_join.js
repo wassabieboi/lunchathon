@@ -14,12 +14,14 @@ function getRestaurantUsers() {
 
 function attachCreateRestaurantButton() {
   $(function() {
+    $('#add-to-restaurant-button').attr('disabled', 'disabled');
     $('#create-restaurant-button').click(function() {
       var restaurantName = $('#restaurant-name-input').val();
       $.post('/create_restaurant/', {'name' : restaurantName}, function(success) {
         if (success.is_created) {
-          $('#restaurant-panel').html('<div class="panel-heading" id="panel-restaurant-name">' + restaurantName + '</div>');
+          $('#restaurant-panel').html('<h3><div class="panel-heading" id="panel-restaurant-name">' + restaurantName + '</div></h3>');
           $('#restaurant-id').text(success.restaurant_id);
+          $('#add-to-restaurant-button').removeAttr('disabled');
         }
         else {
           // put in error popup

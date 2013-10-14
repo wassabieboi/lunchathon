@@ -1,12 +1,13 @@
 .navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
   .navbar-inner
     .container-fluid
-      %ul.nav.pull-left
+      %ul.nav.navbar-nav.navbar-left
         %li.navbar-link= link_to "Fellowship", mobile_dashboard_path
-      %ul.nav.pull-right
+      %ul.nav.navbar-nav.navbar-right
         -if current_user
-          %li.navbar-text= "Hi " + current_user.displayname + "!" 
-          %li.divider-vertical
-          %li.navbar-link= link_to "Logout", log_out_path
+          %li
+            %p.navbar-text= "Hi " + current_user.displayname + "!" 
+          %li
+            %p.navbar-text= link_to "Logout", log_out_path
         -else
           %li= link_to "Hi Guest!"#

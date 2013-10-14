@@ -3,10 +3,11 @@
 = javascript_include_tag "mobile"
 
 %span#restaurant-id{:style => "display:none"}=params[:id]
-:javascript
-  - if params[:id] != "new"
+- if params[:id] != "new"
+  :javascript
     getRestaurantUsers();
-  - else
+- else
+  :javascript
     attachCreateRestaurantButton();
     
 :javascript
@@ -20,7 +21,7 @@
       %span.input-group-btn
         %button.btn.btn-default#create-restaurant-button{:type => "button"} Create restaurant!
   - else
-    .panel-heading#panel-restaurant-name
+    %h3.panel-heading#panel-restaurant-name
   %table.table#restaurant-user-table
     %tbody
 
