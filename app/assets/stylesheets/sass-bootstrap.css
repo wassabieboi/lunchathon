@@ -3789,7 +3789,7 @@ input[type="button"].btn-block {
   text-decoration: none;
   background-color: transparent;
   background-image: none;
-  filter: progid:DXImage-transform@mixin Microsoft.gradient(enabled = false);
+  /*filter: progid:DXImage-transform@mixin Microsoft.gradient(enabled = false);*/
   cursor: not-allowed;
 }
 
@@ -6559,7 +6559,7 @@ body.modal-open,
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
   background-repeat: repeat-x;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#80000000', endColorstr='#00000000');
+  /*filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#80000000', endColorstr='#00000000');*/
 }
 /* line 85, ../../sass/_carousel.scss */
 .carousel-control.right {
@@ -6571,7 +6571,7 @@ body.modal-open,
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
   background-repeat: repeat-x;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#00000000', endColorstr='#80000000');
+  /*filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#00000000', endColorstr='#80000000');*/
 }
 /* line 93, ../../sass/_carousel.scss */
 .carousel-control:hover, .carousel-control:focus {
