@@ -665,7 +665,7 @@ dd {
   margin-left: 0;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 156, ../../sass/_type.scss */
   .dl-horizontal dt {
     float: left;
@@ -3789,7 +3789,7 @@ input[type="button"].btn-block {
   text-decoration: none;
   background-color: transparent;
   background-image: none;
-  /*filter: progid:DXImage-transform@mixin Microsoft.gradient(enabled = false);*/
+  /* filter: progid:DXImage-transform@mixin Microsoft.gradient(enabled = false); */
   cursor: not-allowed;
 }
 
@@ -3842,7 +3842,7 @@ input[type="button"].btn-block {
   margin-bottom: 1px;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 188, ../../sass/_dropdowns.scss */
   .navbar-right .dropdown-menu {
     float: right;
@@ -4503,7 +4503,7 @@ input[type="button"].btn-block {
 .navbar:after {
   clear: both;
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 11, ../../sass/_navbar.scss */
   .navbar {
     border-radius: 4px;
@@ -4521,7 +4521,7 @@ input[type="button"].btn-block {
 .navbar-header:after {
   clear: both;
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 32, ../../sass/_navbar.scss */
   .navbar-header {
     float: left;
@@ -4553,7 +4553,7 @@ input[type="button"].btn-block {
 .navbar-collapse.in {
   overflow-y: auto;
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 51, ../../sass/_navbar.scss */
   .navbar-collapse {
     width: auto;
@@ -4591,7 +4591,7 @@ input[type="button"].btn-block {
   margin-right: -15px;
   margin-left: -15px;
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 100, ../../sass/_navbar.scss */
   .container > .navbar-header,
   .container > .navbar-collapse {
@@ -4604,7 +4604,7 @@ input[type="button"].btn-block {
 .navbar-static-top {
   border-width: 0 0 1px;
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 118, ../../sass/_navbar.scss */
   .navbar-static-top {
     border-radius: 0;
@@ -4619,7 +4619,7 @@ input[type="button"].btn-block {
   left: 0;
   border-width: 0 0 1px;
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 127, ../../sass/_navbar.scss */
   .navbar-fixed-top,
   .navbar-fixed-bottom {
@@ -4651,7 +4651,7 @@ input[type="button"].btn-block {
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 162, ../../sass/_navbar.scss */
   .navbar > .container .navbar-brand {
     margin-left: -15px;
@@ -4681,7 +4681,7 @@ input[type="button"].btn-block {
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 174, ../../sass/_navbar.scss */
   .navbar-toggle {
     display: none;
@@ -4723,7 +4723,7 @@ input[type="button"].btn-block {
     background-image: none;
   }
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 206, ../../sass/_navbar.scss */
   .navbar-nav {
     float: left;
@@ -4740,7 +4740,7 @@ input[type="button"].btn-block {
   }
 }
 
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 263, ../../sass/_navbar.scss */
   .navbar-left {
     float: left;
@@ -4769,7 +4769,7 @@ input[type="button"].btn-block {
     margin-bottom: 5px;
   }
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 273, ../../sass/_navbar.scss */
   .navbar-form {
     width: auto;
@@ -4815,7 +4815,7 @@ input[type="button"].btn-block {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-@media (min-width: 480px) {
+@media (min-width: 200px) {
   /* line 340, ../../sass/_navbar.scss */
   .navbar-text {
     margin-left: 15px;
@@ -6559,7 +6559,7 @@ body.modal-open,
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
   background-repeat: repeat-x;
   *zoom: 1;
-  /*filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#80000000', endColorstr='#00000000');*/
+  /* filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#80000000', endColorstr='#00000000'); */
 }
 /* line 85, ../../sass/_carousel.scss */
 .carousel-control.right {
@@ -6571,7 +6571,7 @@ body.modal-open,
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
   background-repeat: repeat-x;
   *zoom: 1;
-  /*filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#00000000', endColorstr='#80000000');*/
+  /* filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#00000000', endColorstr='#80000000'); */
 }
 /* line 93, ../../sass/_carousel.scss */
 .carousel-control:hover, .carousel-control:focus {
