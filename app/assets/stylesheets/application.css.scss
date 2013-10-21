@@ -1,3 +1,8 @@
+/*
+*= require dashboard
+*= require sass-bootstrap
+*/
+
 body {
   padding-top: 70px;
 }
@@ -5,24 +10,3 @@ body {
 .full-input-width {
   width: 100%;
 }
-
-/*@media (max-width: 768px) {
-  .container {
-    padding:10px;
-    margin:0;
-  }
-
-  .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-bottom:0;
-  }
-
-  .pull-right {
-    width: 200px;
-  }
-
-  .navbar-text {
-    margin-left: 15px;
-  }
-}*/
