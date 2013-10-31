@@ -58,13 +58,8 @@ class DashboardController < ApplicationController
     end
   end
 
-  def get_restaurants
-    results = []
-    restaurants = Restaurant.where(:is_active => true).select("name, id").to_a
-    restaurants.each do |r|
-      results << {:id => r.id, :name => r.name, :count => r.users.count}
-    end
-    respond_with(results)
+  def mobile
+    @restaurants = Restaurant.where(:is_active => true)
   end
 
   def get_users

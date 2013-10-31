@@ -1,10 +1,14 @@
-=render :partial => "mobile_navbar", :layout => "mobile_navbar"
+= render :partial => "mobile_navbar", :layout => "mobile_navbar"
 
 = javascript_include_tag 'mobile'
 
-:javascript
-  getRestaurants()
-  
 .list-group
-  %a.list-group-item#new-restaurant-item{:href => '/m/restaurantnew'}
+  - @restaurants.each do |r|
+    = link_to join_path(r), :class => 'list-group-item', :'restaurant-id' => r.id do
+      %h2.list-group-item-heading
+        = r.name
+      %p.list-group-item-text
+        = '(' + r.users.count.to_s + ' diners)'
+
+  = link_to new_restaurant_path, :class => 'list-group-item', :id => 'new-restaurant-item' do
     %h2 Suggest a new restaurant...
