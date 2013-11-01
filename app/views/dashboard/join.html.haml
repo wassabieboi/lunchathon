@@ -3,10 +3,7 @@
 = javascript_include_tag "mobile"
 
 %span#restaurant-id{:style => "display:none"}=params[:id]
-- if params[:id] != "new"
-  :javascript
-    getRestaurantUsers();
-- else
+- if params[:id] == "new"
   :javascript
     attachCreateRestaurantButton();
     
@@ -15,7 +12,7 @@
   attachModalRegisterButton();
 
 .panel.panel-default#restaurant-panel
-  - if params[:id] == "new"
+  - if params[:id] == 'new'
     .input-group.full-input-width
       %input.form-control#restaurant-name-input{:type => "text"}
       %span.input-group-btn
@@ -23,8 +20,14 @@
   - else
     .panel-heading
       %h3.panel-title#panel-restaurant-name
+        = @restaurant.name
   %table.table#restaurant-user-table
     %tbody
+      - if not @users.nil?
+        - @users.each do |u|
+          %tr
+            %td
+              = u.displayname
 
 .input-group
   - if current_user

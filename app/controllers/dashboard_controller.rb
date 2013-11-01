@@ -10,6 +10,17 @@ class DashboardController < ApplicationController
     end
   end
 
+  def mobile
+    @restaurants = Restaurant.where(:is_active => true)
+  end
+
+  def join
+    if params[:id] != 'new'
+      @restaurant = Restaurant.find(params[:id])
+      @users = @restaurant.users
+    end
+  end
+
   def check_user
     if User.exists?(:username => params[:username])
       session[:username] = params[:username]
@@ -56,18 +67,6 @@ class DashboardController < ApplicationController
     else
       render json: {:is_created => false}
     end
-  end
-
-  def mobile
-    @restaurants = Restaurant.where(:is_active => true)
-  end
-
-  def get_users
-    restaurant = Restaurant.find(params[:restaurant_id])
-    users = restaurant.users.select('displayname')
-    @restaurant_id = params[:restaurant_id]
-    results = {:restaurant_name => restaurant.name, :users => users}
-    respond_with(results)
   end
 
   def get_all_data
