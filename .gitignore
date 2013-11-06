@@ -32,3 +32,6 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+# Ignore pre-compiled assets
+public/assets/*
