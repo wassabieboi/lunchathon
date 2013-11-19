@@ -21,7 +21,7 @@ Lunchathon::Application.routes.draw do
   match '/create_user' => 'dashboard#create_user', :as => 'create_user'
   match '/set_user_to_restaurant' => 'dashboard#set_user_to_restaurant', :as => 'set_user_to_restaurant'
 
-  match '/create_restaurant' => 'dashboard#create_restaurant', :as => 'create_restaurant'
+  match '/create_restaurant' => 'dashboard#create_restaurant', :as => 'create_restaurant', :defaults => {:format => :json}
 
   match '/get_users' => 'dashboard#get_users', :as => 'get_users', :defaults => {:format => :json}
   match '/get_all_data' => 'dashboard#get_all_data', :as => 'get_all_data', :defaults => {:format => :json}

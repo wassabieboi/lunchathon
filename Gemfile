@@ -45,3 +45,4 @@ gem 'jquery-rails'
 
 gem 'haml-rails'
 gem 'bootstrap-sass', :git => 'git://github.com/thomas-mcdonald/bootstrap-sass.git', :branch => '3'
+gem 'websocket-rails'

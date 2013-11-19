@@ -2,11 +2,29 @@
 
 %h1 Fellowship
 
+= javascript_include_tag 'desktop'
+
+%span#restaurant-count{:style => 'display:none'}=@restaurant_count
+
 .container
   .row
-    -@all_data.sort_by { |map| map["restaurant_users"].count }.reverse.each do |ship|
-      .col-md-2
-        %h3= ship["restaurant_name"]
-        -ship["restaurant_users"].each do |user|
-          %p= user["displayname"]
-
+    #restaurant-main-source
+      -@all_data.sort_by { |map| map['restaurant_users'].count }.reverse.each_with_index do |ship, index|
+        -if index < 5
+          .col-lg-2{:'data-id' => ship['restaurant_name']}
+            %h3= ship['restaurant_name']
+            %ul.user-source
+              -ship['restaurant_users'].each do |user|
+                %li{:'data-id' => Digest::SHA1.base64digest(user.username)}
+                  = user['displayname']
+            %ul.user-destination{:style => 'display:none'}
+        -else
+          - break
+      .col-lg-2.restaurant-aux-column{:'data-id' => 'test'}
+        %ul.restaurant-aux-source
+          -@all_data.sort_by { |map| map['restaurant_users'].count }.reverse.each_with_index do |ship, index|
+            -if index >= 5
+              %li{:'data-id' => ship['restaurant_name']}
+                %h4= ship['restaurant_name']
+        %ul.restaurant-aux-destination{:style => 'display:none'}
+    #restaurant-main-destination{:style => 'display:none'}

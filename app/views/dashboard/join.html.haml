@@ -11,6 +11,10 @@
   attachSignUpButton();
   attachModalRegisterButton();
 
+.alert.alert-danger.fade.in#restaurant-created-alert{:style => 'display:none'}
+  %button.close{:type => 'button', 'data-dismiss' => 'alert', 'aria-hidden' => true} ×
+  %h5 That restaurant is already created!
+
 .panel.panel-default#restaurant-panel
   - if params[:id] == 'new'
     .input-group.full-input-width
@@ -41,7 +45,7 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{:type => "button", "data-dismiss" => "modal", "area-hidden"  => "true"} ×
+        %button.close{:type => "button", "data-dismiss" => "modal", "aria-hidden"  => "true"} ×
         %h4.modal-title Register as new user?
       .modal-body
         %p You are a new user, please register!

@@ -4,15 +4,18 @@ function attachCreateRestaurantButton() {
     $('#create-restaurant-button').click(function() {
       var restaurantName = $('#restaurant-name-input').val();
       $.post('/create_restaurant/', {'name' : restaurantName}, function(success) {
+        console.log(success);
         if (success.is_created) {
           $('#restaurant-panel').html('<h3><div class="panel-heading" id="panel-restaurant-name">' + restaurantName + '</div></h3>');
           $('#restaurant-id').text(success.restaurant_id);
           $('#add-to-restaurant-button').removeAttr('disabled');
+          console.log(success);
         }
         else {
-          // put in error popup
+          $('#restaurant-created-alert').alert();
+          console.log(success);
         }
-      });
+      }, 'json');
     });
   });
 }

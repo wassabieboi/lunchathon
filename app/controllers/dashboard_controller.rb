@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
     @all_data = []
     restaurants.each do |restaurant|
       @all_data << {"restaurant_name" => restaurant.name, "restaurant_users" => restaurant.users.select("username, displayname")}
+    @restaurant_count = restaurants.count
     end
   end
 
@@ -49,6 +50,9 @@ class DashboardController < ApplicationController
   end
 
   def set_user_to_restaurant
+    original_top_5 = Restaurant.top5
+    original_all_but_top_5 = Restaurant.all_but_top5
+    
     restaurant_to_join = Restaurant.find(params[:restaurant_id])
     user_to_add = User.find_by_username(session[:username])
     
@@ -60,12 +64,17 @@ class DashboardController < ApplicationController
   def create_restaurant
     restaurant = Restaurant.new(:name => params[:name], :is_active => true)
     if restaurant.save
-      # result["is_created"] = true
-      # result["restaurant_id"] = restaurant.id
       puts "id" << restaurant.id
+      if Restaurant.where(:is_active => true).count <= 5
+        event = 'newrestaurantmain'
+      else
+        event = 'newrestaurantaux'
+      end
+      WebsocketRails[:restaurants].trigger(event, restaurant)
       render json: {:is_created => true, :restaurant_id => restaurant.id}
     else
-      render json: {:is_created => false}
+      # render json: {:is_created => false}
+      respond_with false
     end
   end
 
