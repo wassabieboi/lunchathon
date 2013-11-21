@@ -1,4 +1,4 @@
-var dispatcher = new WebSocketRails("localhost:3000/websocket");
+var dispatcher = new WebSocketRails("lunchathon.herokuapp.com/websocket");
 
 var restaurantChannel = dispatcher.subscribe('restaurants');
 restaurantChannel.bind('new_restaurant_main', function(restaurant) {
