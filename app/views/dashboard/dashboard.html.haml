@@ -10,11 +10,10 @@
       -@top5.each do |ship|
         .col-lg-2{:'data-id' => ship.id}
           %h3= ship.name
-          %ul.user-source
+          %ul.user-list
             -ship.users.each do |user|
               %li{:'data-id' => Digest::SHA1.base64digest(user.username)}
                 = user.displayname
-          / %ul.user-destination{:style => 'display:none'}
       .col-lg-2.restaurant-aux-column{:'data-id' => 'aux-column'}
         %ul.restaurant-aux-source
           -@rest_of_restaurants.each do |ship|

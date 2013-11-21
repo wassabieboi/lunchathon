@@ -48,8 +48,8 @@ class DashboardController < ApplicationController
 
   def set_user_to_restaurant
     original_all_by_desc_users = Restaurant.all_by_desc_users
-    original_top_5 = original_all_by_desc_users[0..4]
-    original_all_but_top_5 = original_all_by_desc_users[5..-1]
+    original_main = original_all_by_desc_users[0..4]
+    original_aux = original_all_by_desc_users[5..-1]
 
     restaurant_to_join = Restaurant.find(params[:restaurant_id])
     user_to_add = User.find_by_username(session[:username])
@@ -58,14 +58,26 @@ class DashboardController < ApplicationController
     restaurant_to_join.users << user_to_add
 
     new_all_by_desc_users = Restaurant.all_by_desc_users
-    new_top_5 = new_all_by_desc_users[0..4]
-    new_all_but_top_5 = new_all_by_desc_users[5..-1]
+    new_main = new_all_by_desc_users[0..4]
+    new_aux = new_all_by_desc_users[5..-1]
+
     user_restaurant = {:user => {:username => Digest::SHA1.base64digest(user_to_add.username), :displayname => user_to_add.displayname}, :old_restaurant => original_restaurant ? original_restaurant.attributes.slice('id', 'name') : nil, :new_restaurant => restaurant_to_join.attributes.slice('id', 'name')}
 
     WebsocketRails[:users].trigger('user_to_new_restaurant', user_restaurant)
 
-    # if original_top_5.map {|r| r.id} != ne_wtop_5.map {|r| r.id}
-    #   WebsocketRails[:restaurants].trigger 
+    is_different_aux = original_aux.map {|r| r.id} != new_aux.map {|r| r.id}
+    new_aux_response = new_aux.map {|r| r.attributes.slice('id', 'name')}
+    if is_different_aux
+      WebsocketRails[:restaurants].trigger('new_aux_ordering', new_aux_response)
+    end
+
+    is_different_main = original_main.map {|r| r.id} != new_main.map {|r| r.id}
+    if is_different_main
+      new_main_response = new_main.map {|r| {:id => r.id, :name => r.name, :users => r.users.map {|u| {:username => Digest::SHA1.base64digest(u.username), :displayname => u.displayname}} }}
+      WebsocketRails[:restaurants].trigger('new_main_ordering', new_main_response)
+      # uncomment and comment above for sequential switching
+      # WebsocketRails[:restaurants].trigger('new_main_ordering', {:main_restaurants => new_main_response, :aux_restaurants => is_different_aux ? new_aux_response : nil})
+    end
 
     flash.now[:success] = "Successfully added to " + restaurant_to_join.name
     redirect_to mobile_dashboard_path
