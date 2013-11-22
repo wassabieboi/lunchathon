@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
     all_restaurants = Restaurant.all_by_desc_users
     @top5 = all_restaurants[0..4] || []
     @rest_of_restaurants = all_restaurants[5..-1] || []
+    @request = request
   end
 
   def mobile
@@ -95,8 +96,8 @@ class DashboardController < ApplicationController
       WebsocketRails[:restaurants].trigger(event, restaurant)
       render json: {:is_created => true, :restaurant_id => restaurant.id}
     else
-      # render json: {:is_created => false}
-      respond_with false
+      render json: {:is_created => false}
+      # respond_with false
     end
   end
 

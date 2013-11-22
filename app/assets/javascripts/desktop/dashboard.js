@@ -1,58 +1,60 @@
-var dispatcher = new WebSocketRails("lunchathon.herokuapp.com/websocket");
+$(function () {
+  var dispatcher = new WebSocketRails(window.requestAddress + '/websocket');
 
-var restaurantChannel = dispatcher.subscribe('restaurants');
-restaurantChannel.bind('new_restaurant_main', function(restaurant) {
-  $('#restaurant-main-destination').html($('#restaurant-main-source').clone().children());
-  createMainRestaurant(restaurant);
-  mainQuicksand();
-});
+  var restaurantChannel = dispatcher.subscribe('restaurants');
+  restaurantChannel.bind('new_restaurant_main', function(restaurant) {
+    $('#restaurant-main-destination').html($('#restaurant-main-source').clone().children());
+    createMainRestaurant(restaurant);
+    mainQuicksand();
+  });
 
-restaurantChannel.bind('new_restaurant_aux', function(restaurant) {
-  cloneAux();
-  createAuxRestaurant(restaurant);
-  auxQuicksand();
-});
+  restaurantChannel.bind('new_restaurant_aux', function(restaurant) {
+    cloneAux();
+    createAuxRestaurant(restaurant);
+    auxQuicksand();
+  });
 
-restaurantChannel.bind('new_main_ordering', function(newMainRestaurants) {
-// uncomment and comment above for sequential switching
-// restaurantChannel.bind('new_main_ordering', function(allNewRestaurants) {
-  // var newMainRestaurants = allNewRestaurants.main_restaurants;
-  // var newAuxRestaurants = allNewRestaurants.aux_restaurants;
-
-  // if (newAuxRestaurants) {
-  //   clearAux();
-  //   orderAuxRestaurants(newAuxRestaurants);
-  // }
-
-  $('#restaurant-main-destination').html($('#restaurant-main-source div.restaurant-aux-column').clone());
-  var newMainLength = newMainRestaurants.length;
-  for (var i = 0; i < newMainLength; i++) {
-    createMainRestaurant(newMainRestaurants[i]);
-  };
-  mainQuicksand();
+  restaurantChannel.bind('new_main_ordering', function(newMainRestaurants) {
   // uncomment and comment above for sequential switching
-  // newAuxRestaurants ? auxThenMainQuicksand() : mainQuicksand();
-});
+  // restaurantChannel.bind('new_main_ordering', function(allNewRestaurants) {
+    // var newMainRestaurants = allNewRestaurants.main_restaurants;
+    // var newAuxRestaurants = allNewRestaurants.aux_restaurants;
 
-restaurantChannel.bind('new_aux_ordering', function(newAuxRestaurants) {
-  clearAux();
-  orderAuxRestaurants(newAuxRestaurants);
-});
+    // if (newAuxRestaurants) {
+    //   clearAux();
+    //   orderAuxRestaurants(newAuxRestaurants);
+    // }
 
-var userChannel = dispatcher.subscribe('users');
-userChannel.bind('user_to_new_restaurant', function(userRestaurants) {
-  var user = userRestaurants.user;
-  var $userLiElement = $('#restaurant-main-source li[data-id="' + user.username + '"]');
-  var userInOldRestaurant = userRestaurants.old_restaurant ? ($userLiElement.length ? $userLiElement : false) : false;
-  if (userInOldRestaurant) {
-    userInOldRestaurant.fadeOut(function() {
-      userInOldRestaurant.remove();
+    $('#restaurant-main-destination').html($('#restaurant-main-source div.restaurant-aux-column').clone());
+    var newMainLength = newMainRestaurants.length;
+    for (var i = 0; i < newMainLength; i++) {
+      createMainRestaurant(newMainRestaurants[i]);
+    };
+    mainQuicksand();
+    // uncomment and comment above for sequential switching
+    // newAuxRestaurants ? auxThenMainQuicksand() : mainQuicksand();
+  });
+
+  restaurantChannel.bind('new_aux_ordering', function(newAuxRestaurants) {
+    clearAux();
+    orderAuxRestaurants(newAuxRestaurants);
+  });
+
+  var userChannel = dispatcher.subscribe('users');
+  userChannel.bind('user_to_new_restaurant', function(userRestaurants) {
+    var user = userRestaurants.user;
+    var $userLiElement = $('#restaurant-main-source li[data-id="' + user.username + '"]');
+    var userInOldRestaurant = userRestaurants.old_restaurant ? ($userLiElement.length ? $userLiElement : false) : false;
+    if (userInOldRestaurant) {
+      userInOldRestaurant.fadeOut(function() {
+        userInOldRestaurant.remove();
+        fadeIntoNewRestaurant(createUser(user), userRestaurants.new_restaurant.id);
+      });
+    }
+    else {
       fadeIntoNewRestaurant(createUser(user), userRestaurants.new_restaurant.id);
-    });
-  }
-  else {
-    fadeIntoNewRestaurant(createUser(user), userRestaurants.new_restaurant.id);
-  }
+    }
+  });
 });
 
 function fadeIntoNewRestaurant($user, newRestaurantId) {

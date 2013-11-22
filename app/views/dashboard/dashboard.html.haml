@@ -3,6 +3,8 @@
 %h1 Fellowship
 
 = javascript_include_tag 'desktop'
+:javascript
+  window.requestAddress = "#{@request.host.to_s + ':' + @request.port.to_s}"
 
 .container
   .row
