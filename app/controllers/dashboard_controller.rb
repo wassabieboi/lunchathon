@@ -66,8 +66,8 @@ class DashboardController < ApplicationController
 
     WebsocketRails[:users].trigger('user_to_new_restaurant', user_restaurant)
 
-    is_different_aux = original_aux.map {|r| r.id} != new_aux.map {|r| r.id}
-    new_aux_response = new_aux.map {|r| r.attributes.slice('id', 'name')}
+    is_different_aux = original_aux ? original_aux.map {|r| r.id} != new_aux.map {|r| r.id} : false
+    new_aux_response = new_aux ? new_aux.map {|r| r.attributes.slice('id', 'name')} : false
     if is_different_aux
       WebsocketRails[:restaurants].trigger('new_aux_ordering', new_aux_response)
     end
