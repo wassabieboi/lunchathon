@@ -87,7 +87,7 @@ class DashboardController < ApplicationController
   def create_restaurant
     existing_restaurant = Restaurant.find_by_name(params[:name])
     if existing_restaurant
-      existing_restaurant.update('is_active', true)
+      existing_restaurant.update_attribute('is_active', true)
       render json: {:is_created => true, :restaurant_id => existing_restaurant.id}
     else
       restaurant = Restaurant.new(:name => params[:name], :is_active => true)
