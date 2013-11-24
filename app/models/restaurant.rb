@@ -7,7 +7,7 @@ class Restaurant < ActiveRecord::Base
     joins("LEFT JOIN users on users.restaurant_id = restaurants.id").
     where("restaurants.is_active" => true).
     group("restaurants.id").
-    order("user_count DESC").
+    order("user_count DESC, restaurants.id ASC").
     limit(5)
 
   scope :all_by_desc_users,
@@ -15,7 +15,7 @@ class Restaurant < ActiveRecord::Base
     joins("LEFT JOIN users on users.restaurant_id = restaurants.id").
     where("restaurants.is_active" => true).
     group("restaurants.id").
-    order("user_count DESC")
+    order("user_count DESC, restaurants.id ASC")
 
   validates :name, :uniqueness => true, :presence => true
 end
