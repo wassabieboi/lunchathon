@@ -37,8 +37,9 @@
   - if current_user
     %input.form-control#username-input{:type => "text", :readonly => "true", :value => session[:username]}
   - else
+    %label Enter your uniquely identifiable username:
     %input.form-control#username-input{:type => "text"}
-  %span.input-group-btn
+  %span.input-group-btn#add-to-restaurant-span
     %button.btn.btn-default#add-to-restaurant-button{:type => "button"} Sign me up!
 
 .modal.fade#modal-register
