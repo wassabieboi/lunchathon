@@ -85,19 +85,25 @@ class DashboardController < ApplicationController
   end
 
   def create_restaurant
-    restaurant = Restaurant.new(:name => params[:name], :is_active => true)
-    if restaurant.save
-      puts "id" << restaurant.id
-      if Restaurant.where(:is_active => true).count <= 5
-        event = 'new_restaurant_main'
-      else
-        event = 'new_restaurant_aux'
-      end
-      WebsocketRails[:restaurants].trigger(event, restaurant)
-      render json: {:is_created => true, :restaurant_id => restaurant.id}
+    existing_restaurant = Restaurant.find_by_name(params[:name])
+    if existing_restaurant
+      existing_restaurant.update('is_active', true)
+      render json: {:is_created => true, :restaurant_id => existing_restaurant.id}
     else
-      render json: {:is_created => false}
-      # respond_with false
+      restaurant = Restaurant.new(:name => params[:name], :is_active => true)
+      if restaurant.save
+        puts "id" << restaurant.id
+        if Restaurant.where(:is_active => true).count <= 5
+          event = 'new_restaurant_main'
+        else
+          event = 'new_restaurant_aux'
+        end
+        WebsocketRails[:restaurants].trigger(event, restaurant)
+        render json: {:is_created => true, :restaurant_id => restaurant.id}
+      else
+        render json: {:is_created => false}
+        # respond_with false
+      end
     end
   end
 
