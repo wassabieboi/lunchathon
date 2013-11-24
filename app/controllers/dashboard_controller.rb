@@ -10,7 +10,7 @@ class DashboardController < ApplicationController
   end
 
   def mobile
-    @restaurants = Restaurant.where(:is_active => true)
+    @restaurants = Restaurant.all_by_desc_users
   end
 
   def join
